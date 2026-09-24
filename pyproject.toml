@@ -1,0 +1,64 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "telco_churn"
+version = "0.0.1"
+description = "ML project that predicts wether a customer will churn based on account and service usage data"
+authors = [
+  { name = "Team 9" },
+]
+
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    
+]
+dependencies = [
+    "black~=26.5",
+    "flake8~=7.3",
+    "ipython~=9.17",
+    "isort~=9.0",
+    "jupyterlab~=4.6",
+    "lightning~=2.6",
+    "loguru~=0.7.3",
+    "matplotlib~=3.11",
+    "notebook~=7.6",
+    "numpy~=2.5",
+    "pandas~=3.0",
+    "pip~=26.2",
+    "pytest~=9.1",
+    "python-dotenv~=1.2",
+    "scikit-learn~=1.9",
+    "seaborn~=0.13.2",
+    "torch~=2.14",
+    "tqdm~=4.70",
+    "typer~=0.27.2",
+    "pdoc~=16.0",
+]
+requires-python = "~=3.13.0"
+
+[tool.black]
+line-length = 99
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+known_first_party = ["telco_churn"]
+force_sort_within_sections = true
+
+[tool.uv]
+# torchmetrics pulls in torchvision transitively (for its optional
+# image metrics, which we never use). The torchvision version that
+# resolves from PyPI is incompatible with this lab's custom
+# torch==2.13.0+cu130 build (RuntimeError: operator torchvision::nms
+# does not exist). We exclude it outright since this project never
+# imports torchvision directly.
+exclude-dependencies = ["torchvision"]

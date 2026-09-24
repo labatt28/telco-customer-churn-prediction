@@ -21,6 +21,22 @@
             <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                    pattern=".+" required>
 
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#telco-customer-churn-prediction">Telco Customer Churn Prediction</a>
+  <ul>
+    <li><a href="#authors">Authors</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#status">Status</a></li>
+    <li><a href="#environment-setup">Environment setup</a></li>
+    <li><a href="#how-to-run">How to run</a></li>
+    <li><a href="#documentation">Documentation</a></li>
+    <li><a href="#dependency-management">Dependency management</a></li>
+    <li><a href="#project-organization">Project Organization</a></li>
+    <li><a href="#project-progress">Project progress</a></li>
+  </ul></li>
+</ul>
+
 
             <h2>Submodules</h2>
             <ul>
@@ -30,6 +46,10 @@
                     <li><a href="telco_churn/modeling.html">modeling</a></li>
                     <li><a href="telco_churn/plots.html">plots</a></li>
             </ul>
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+    </ul>
 
 
 
@@ -45,12 +65,286 @@
                     <h1 class="modulename">
 telco_churn    </h1>
 
-                
+                        <div class="docstring"><p>telco_churn: a small, structured ML pipeline for customer churn prediction.</p>
+
+<p>Practice 1-3 - Software Development Oriented to Machine Learning (UPNA).</p>
+
+<h1 id="telco-customer-churn-prediction">Telco Customer Churn Prediction</h1>
+
+<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
+    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
+</a>
+
+<p>ML project that predicts whether a customer will churn based on account and service usage data</p>
+
+<hr />
+
+<h2 id="authors">Authors</h2>
+
+<p>Alberto Bellera
+ Iñaki Garatea
+ Pablo Labat</p>
+
+<hr />
+
+<h2 id="data">Data</h2>
+
+<p>This project uses the <a href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn">Telco Customer Churn</a>
+dataset (Kaggle, originally an IBM Sample Data Set), licensed CC BY 4.0.
+The raw CSV is not tracked in this repository (excluded via
+<code>.gitignore</code>) to keep the repo lightweight.</p>
+
+<p>To get it:</p>
+
+<ol>
+<li>Download <code>WA_Fn-UseC_-Telco-Customer-Churn.csv</code> from the Kaggle
+link above (requires a free Kaggle account).</li>
+<li>Place it at <code>data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv</code>.</li>
+</ol>
+
+<p>Then continue with "How to run" below.</p>
+
+<hr />
+
+<h2 id="status">Status</h2>
+
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Project structure (Cookiecutter Data Science)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Dataset integration (<code>telco_churn/dataset.py</code>)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Exploratory Data Analysis (<code>notebooks/1.0-eda.ipynb</code>)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Feature engineering / preprocessing (<code>telco_churn/features.py</code>)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Model training (<code>telco_churn/modeling/train.py</code>)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Performance evaluation (<code>telco_churn/modeling/predict.py</code>)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Final report (<code>reports/report.pdf</code>)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Code documentation (Google-style docstrings, all modules)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> HTML documentation (<code>pdoc</code>, see <code>docs/</code>)</li>
+<li><input type="checkbox" class="task-list-item-checkbox" checked disabled> Pinned dependencies (<code>uv</code>, verified on a clean environment)</li>
+</ul>
+
+<hr />
+
+<h2 id="environment-setup">Environment setup</h2>
+
+<p>This project uses <code>uv</code> for dependency and environment management.</p>
+
+<p><strong>Recommended (reuses the lab's <code>py313ml</code> conda environment, which
+already has PyTorch + CUDA configured for the GPU — much faster,
+no multi-GB re-download):</strong></p>
+
+<pre><code>conda activate py313ml
+uv sync
+# always pass --active afterwards so uv reuses py313ml instead of
+# creating its own .venv:
+uv run --active python -m <a href="telco_churn/dataset.html">telco_churn.dataset</a>
+</code></pre>
+
+<p><strong>Also fully supported — a clean, from-scratch environment (verified,
+see note below):</strong></p>
+
+<pre><code>uv sync
+uv run python -m <a href="telco_churn/dataset.html">telco_churn.dataset</a>
+</code></pre>
+
+<p>Both paths were tested and produce identical results. <code>uv sync</code> alone
+(no lab environment) downloads PyTorch with CUDA support from PyPI
+directly — this project does not depend on any lab-exclusive package
+build.</p>
+
+<h3 id="known-dependency-issue-torchvision">Known dependency issue: <code>torchvision</code></h3>
+
+<p><code>lightning</code> transitively pulls in <code>torchmetrics</code>, which — purely for
+its optional image-metric functions, which this project never uses —
+imports <code>torchvision</code>. On this environment, the <code>torchvision</code> wheel
+that resolves is binary-incompatible with the installed <code>torch</code>
+build (<code>RuntimeError: operator torchvision::nms does not exist</code>).
+Since we never import <code>torchvision</code> directly, we exclude it outright
+in <code>pyproject.toml</code>:</p>
+
+<pre><code>[tool.uv]
+exclude-dependencies = ["torchvision"]
+</code></pre>
+
+<p>This requires <code>uv &gt;= 0.9.8</code> (<code>uv self update</code> if you hit an "unknown
+field" error on this setting).</p>
+
+<hr />
+
+<h2 id="how-to-run">How to run</h2>
+
+<p>Run in order — each step reads the output of the previous one:</p>
+
+<pre><code># 1. Clean the raw data
+uv run --active python -m <a href="telco_churn/dataset.html">telco_churn.dataset</a>
+
+# 2. Build model-ready features (train/val/test splits)
+uv run --active python -m <a href="telco_churn/features.html">telco_churn.features</a>
+
+# 3. Explore the data (optional, for inspection)
+uv run --active jupyter lab
+# then open notebooks/1.0-eda.ipynb
+
+# 4. Train the model
+uv run --active python -m <a href="telco_churn/modeling/train.html">telco_churn.modeling.train</a>
+
+# 5. Evaluate and generate performance figures
+uv run --active python -m <a href="telco_churn/modeling/predict.html">telco_churn.modeling.predict</a>
+</code></pre>
+
+<p>Outputs: cleaned/processed data in <code>data/processed/</code>, the trained
+checkpoint in <code>models/churn_model.ckpt</code>, and performance figures in
+<code>reports/figures/</code>.</p>
+
+<p>(Drop <code>--active</code> if using a from-scratch <code>uv sync</code> environment
+instead of the lab's <code>py313ml</code>.)</p>
+
+<hr />
+
+<h2 id="documentation">Documentation</h2>
+
+<p>API documentation is generated from the project's docstrings
+(Google style) using <a href="https://pdoc.dev/"><code>pdoc</code></a>, and stored as a
+static HTML site in <code>docs/</code>.</p>
+
+<h6 id="to-regenerate-it-after-changing-any-docstrings">To regenerate it after changing any docstrings:</h6>
+
+<blockquote>
+  <p>uv run --active pdoc telco_churn -o docs</p>
+</blockquote>
+
+<p>To browse it locally with live-reload instead:</p>
+
+<pre><code>uv run --active pdoc telco_churn --http localhost:8080
+</code></pre>
+
+<hr />
+
+<h2 id="dependency-management">Dependency management</h2>
+
+<p>Dependencies are declared in <code>pyproject.toml</code> and managed with <code>uv</code>.
+Version constraints follow a consistent strategy:</p>
+
+<ul>
+<li>Packages with a stable major version (&gt;=1.0) are pinned as
+<code>package~=X.Y</code> — fixes the major version, allows minor/patch
+updates (PEP 440 compatible release: <code>~=2.14</code> means <code>&gt;=2.14,&lt;3.0</code>).</li>
+<li>Packages still in <code>0.x</code> (<code>seaborn</code>, <code>loguru</code>, <code>typer</code>) are pinned
+more conservatively as <code>package~=0.Y.Z</code> (patch-only updates), since
+pre-1.0 releases don't guarantee API stability between minor
+versions.</li>
+<li>Only direct imports are listed as dependencies (e.g. <code>torchmetrics</code>
+was removed — it's never imported directly, only pulled in
+automatically by <code>lightning</code>).</li>
+</ul>
+
+<p>Reproducibility was verified end-to-end on a completely clean
+environment (no pre-existing packages, no lab-specific setup): a bare
+<code>uv sync</code> correctly resolves and installs every dependency, including
+a working CUDA-enabled PyTorch build, and the full pipeline
+(<code>dataset</code> → <code>features</code> → <code>train</code> → <code>predict</code>) runs to completion
+with matching results.</p>
+
+<hr />
+
+<h2 id="project-organization">Project Organization</h2>
+
+<p>├── LICENSE &lt;- Open-source license if one is chosen
+├── Makefile &lt;- Makefile with convenience commands like make data or make train
+├── README.md &lt;- The top-level README for developers using this project.
+├── data
+│ ├── external &lt;- Data from third party sources.
+│ ├── interim &lt;- Intermediate data that has been transformed.
+│ ├── processed &lt;- The final, canonical data sets for modeling.
+│ └── raw &lt;- The original, immutable data dump.
+│
+├── docs &lt;- pdoc-generated HTML API documentation
+│
+├── models &lt;- Trained and serialized models, model predictions, or model summaries
+│
+├── notebooks &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
+│ the creator's initials, and a short - delimited description, e.g.
+│ 1.0-jqp-initial-data-exploration.
+│
+├── pyproject.toml &lt;- Project configuration file with package metadata for
+│ telco_churn and configuration for tools like black
+│
+├── references &lt;- Data dictionaries, manuals, and all other explanatory materials.
+│
+├── reports &lt;- Generated analysis as HTML, PDF, LaTeX, etc.
+│ └── figures &lt;- Generated graphics and figures to be used in reporting
+│
+├── requirements.txt &lt;- The requirements file for reproducing the analysis environment, e.g.
+│ generated with pip freeze &gt; requirements.txt
+│
+├── setup.cfg &lt;- Configuration file for flake8
+│
+└── telco_churn &lt;- Source code for use in this project.
+│
+├── init.py &lt;- Makes telco_churn a Python module
+│
+├── config.py &lt;- Store useful variables and configuration
+│
+├── dataset.py &lt;- Scripts to download or generate data
+│
+├── features.py &lt;- Code to create features for modeling
+│
+├── modeling
+│ ├── init.py
+│ ├── predict.py &lt;- Code to run model inference with trained models
+│ └── train.py &lt;- Code to train models
+│
+└── plots.py &lt;- Code to create visualizations</p>
+
+<hr />
+
+<h2 id="project-progress">Project progress</h2>
+
+<p>This project was built following a complete software-engineering
+workflow, from raw data to a trained, evaluated, and documented model:</p>
+
+<ul>
+<li><strong>Environment &amp; dependencies</strong>: managed with <code>uv</code>. Dependencies are
+version-pinned (<code>~=</code>) and reproducibility was verified on a clean
+environment (see "Dependency management" above).</li>
+<li><strong>Project structure</strong>: generated with the official
+<code>cookiecutter-data-science</code> (<code>ccds</code>) tool, as recommended in the
+assignment.</li>
+<li><strong>Data ingestion &amp; cleaning</strong> (<code>telco_churn/dataset.py</code>): loads the
+raw Kaggle CSV and fixes a data quality issue found during
+inspection (11 blank <code>TotalCharges</code> values, all <code>tenure == 0</code>
+customers).</li>
+<li><strong>Exploratory Data Analysis</strong> (<code>notebooks/1.0-eda.ipynb</code>): target
+distribution, feature distributions, feature-vs-churn relationships,
+and a correlation heatmap, each interpreted in writing.</li>
+<li><strong>Feature engineering</strong> (<code>telco_churn/features.py</code>): categorical
+encoding, stratified 70/15/15 split, leakage-safe scaling.</li>
+<li><strong>Model training</strong> (<code>telco_churn/modeling/train.py</code>): a small MLP
+(~1.5K parameters) trained with PyTorch Lightning, reaching 79.2%
+test accuracy (vs. a 73.5% naive baseline).</li>
+<li><strong>Performance evaluation</strong> (<code>telco_churn/modeling/predict.py</code> +
+<code>telco_churn/plots.py</code>): confusion matrix, calibration curve,
+training curves, and highest-loss-sample analysis, all saved to
+<code>reports/figures/</code>.</li>
+<li><strong>Report</strong> (<code>reports/report.pdf</code> / <code>reports/report.md</code>): a 2-page
+report interpreting all performance visualizations.</li>
+<li><strong>Code documentation</strong>: Google-style docstrings across every
+module, with a working <code>pdoc</code> HTML export in <code>docs/</code>.</li>
+</ul>
+</div>
+
                         <input id="mod-telco_churn-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
                         <label class="view-source-button" for="mod-telco_churn-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">telco_churn</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>  <span class="c1"># noqa: F401</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">"""telco_churn: a small, structured ML pipeline for customer churn prediction.</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">Practice 1-3 - Software Development Oriented to Machine Learning (UPNA).</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">.. include:: ../README.md</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="sd">"""</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">"google"</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">telco_churn</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>  <span class="c1"># noqa: F401</span>
 </span></pre></div>
 
 

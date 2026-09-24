@@ -227,3 +227,27 @@ workflow, from raw data to a trained, evaluated, and documented model:
   report interpreting all performance visualizations.
 - **Code documentation**: Google-style docstrings across every
   module, with a working `pdoc` HTML export in `docs/`.
+
+--------
+
+## Contributing
+
+1. Create a feature branch from `main`:
+       git checkout -b feature/your-change-name
+2. Make your changes. Keep commits focused and use descriptive
+   messages.
+3. Before opening a pull request, run the formatting and linting
+   tools:
+       uv run black telco_churn/
+       uv run isort telco_churn/
+       uv run flake8 telco_churn/
+4. If you changed any docstrings, regenerate the HTML documentation
+   so it stays in sync:
+       uv run pdoc telco_churn -o docs
+5. Push your branch and open a Pull Request against `main` on
+   GitHub. Briefly describe what changed and why.
+6. Once reviewed and merged, delete the feature branch.
+
+Please do not commit directly to `main`, and never commit the raw
+dataset, API keys, or other sensitive data (see `.gitignore`).
+  

@@ -125,35 +125,23 @@ link above (requires a free Kaggle account).</li>
 
 <h2 id="environment-setup">Environment setup</h2>
 
-<p>This project uses <code>uv</code> for dependency and environment management.</p>
-
-<p><strong>Recommended (reuses the lab's <code>py313ml</code> conda environment, which
-already has PyTorch + CUDA configured for the GPU — much faster,
-no multi-GB re-download):</strong></p>
-
-<pre><code>conda activate py313ml
-uv sync
-# always pass --active afterwards so uv reuses py313ml instead of
-# creating its own .venv:
-uv run --active python -m <a href="telco_churn/dataset.html">telco_churn.dataset</a>
-</code></pre>
-
-<p><strong>Also fully supported — a clean, from-scratch environment (verified,
-see note below):</strong></p>
+<p>This project uses <code>uv</code> for dependency and environment management.
+Everything needed to reproduce the environment is declared in
+<code>pyproject.toml</code> (and locked in <code>uv.lock</code>) -- no external environment
+or lab-specific setup is required.</p>
 
 <pre><code>uv sync
-uv run python -m <a href="telco_churn/dataset.html">telco_churn.dataset</a>
 </code></pre>
 
-<p>Both paths were tested and produce identical results. <code>uv sync</code> alone
-(no lab environment) downloads PyTorch with CUDA support from PyPI
-directly — this project does not depend on any lab-exclusive package
-build.</p>
+<p>This creates a <code>.venv/</code> and installs every dependency (including a
+CUDA-enabled PyTorch build from PyPI), pinned to the versions in
+<code>uv.lock</code>. Verified end-to-end on a completely clean machine (see
+"Dependency management" below).</p>
 
 <h3 id="known-dependency-issue-torchvision">Known dependency issue: <code>torchvision</code></h3>
 
-<p><code>lightning</code> transitively pulls in <code>torchmetrics</code>, which — purely for
-its optional image-metric functions, which this project never uses —
+<p><code>lightning</code> transitively pulls in <code>torchmetrics</code>, which -- purely for
+its optional image-metric functions, which this project never uses --
 imports <code>torchvision</code>. On this environment, the <code>torchvision</code> wheel
 that resolves is binary-incompatible with the installed <code>torch</code>
 build (<code>RuntimeError: operator torchvision::nms does not exist</code>).
@@ -174,28 +162,25 @@ field" error on this setting).</p>
 <p>Run in order — each step reads the output of the previous one:</p>
 
 <pre><code># 1. Clean the raw data
-uv run --active python -m <a href="telco_churn/dataset.html">telco_churn.dataset</a>
+uv run python -m <a href="telco_churn/dataset.html">telco_churn.dataset</a>
 
 # 2. Build model-ready features (train/val/test splits)
-uv run --active python -m <a href="telco_churn/features.html">telco_churn.features</a>
+uv run python -m <a href="telco_churn/features.html">telco_churn.features</a>
 
 # 3. Explore the data (optional, for inspection)
-uv run --active jupyter lab
+uv run jupyter lab
 # then open notebooks/1.0-eda.ipynb
 
 # 4. Train the model
-uv run --active python -m <a href="telco_churn/modeling/train.html">telco_churn.modeling.train</a>
+uv run python -m <a href="telco_churn/modeling/train.html">telco_churn.modeling.train</a>
 
 # 5. Evaluate and generate performance figures
-uv run --active python -m <a href="telco_churn/modeling/predict.html">telco_churn.modeling.predict</a>
+uv run python -m <a href="telco_churn/modeling/predict.html">telco_churn.modeling.predict</a>
 </code></pre>
 
 <p>Outputs: cleaned/processed data in <code>data/processed/</code>, the trained
 checkpoint in <code>models/churn_model.ckpt</code>, and performance figures in
 <code>reports/figures/</code>.</p>
-
-<p>(Drop <code>--active</code> if using a from-scratch <code>uv sync</code> environment
-instead of the lab's <code>py313ml</code>.)</p>
 
 <hr />
 
@@ -208,12 +193,12 @@ static HTML site in <code>docs/</code>.</p>
 <h6 id="to-regenerate-it-after-changing-any-docstrings">To regenerate it after changing any docstrings:</h6>
 
 <blockquote>
-  <p>uv run --active pdoc telco_churn -o docs</p>
+  <p>uv run pdoc telco_churn -o docs</p>
 </blockquote>
 
 <p>To browse it locally with live-reload instead:</p>
 
-<pre><code>uv run --active pdoc telco_churn --http localhost:8080
+<pre><code>uv run pdoc telco_churn --http localhost:8080
 </code></pre>
 
 <hr />

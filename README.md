@@ -49,32 +49,21 @@ Then continue with "How to run" below.
 ## Environment setup
 
 This project uses `uv` for dependency and environment management.
-
-**Recommended (reuses the lab's `py313ml` conda environment, which
-already has PyTorch + CUDA configured for the GPU — much faster,
-no multi-GB re-download):**
-
-    conda activate py313ml
-    uv sync
-    # always pass --active afterwards so uv reuses py313ml instead of
-    # creating its own .venv:
-    uv run --active python -m telco_churn.dataset
-
-**Also fully supported — a clean, from-scratch environment (verified,
-see note below):**
+Everything needed to reproduce the environment is declared in
+`pyproject.toml` (and locked in `uv.lock`) -- no external environment
+or lab-specific setup is required.
 
     uv sync
-    uv run python -m telco_churn.dataset
 
-Both paths were tested and produce identical results. `uv sync` alone
-(no lab environment) downloads PyTorch with CUDA support from PyPI
-directly — this project does not depend on any lab-exclusive package
-build.
+This creates a `.venv/` and installs every dependency (including a
+CUDA-enabled PyTorch build from PyPI), pinned to the versions in
+`uv.lock`. Verified end-to-end on a completely clean machine (see
+"Dependency management" below).
 
 ### Known dependency issue: `torchvision`
 
-`lightning` transitively pulls in `torchmetrics`, which — purely for
-its optional image-metric functions, which this project never uses —
+`lightning` transitively pulls in `torchmetrics`, which -- purely for
+its optional image-metric functions, which this project never uses --
 imports `torchvision`. On this environment, the `torchvision` wheel
 that resolves is binary-incompatible with the installed `torch`
 build (`RuntimeError: operator torchvision::nms does not exist`).
@@ -94,27 +83,24 @@ field" error on this setting).
 Run in order — each step reads the output of the previous one:
 
     # 1. Clean the raw data
-    uv run --active python -m telco_churn.dataset
+    uv run python -m telco_churn.dataset
 
     # 2. Build model-ready features (train/val/test splits)
-    uv run --active python -m telco_churn.features
+    uv run python -m telco_churn.features
 
     # 3. Explore the data (optional, for inspection)
-    uv run --active jupyter lab
+    uv run jupyter lab
     # then open notebooks/1.0-eda.ipynb
 
     # 4. Train the model
-    uv run --active python -m telco_churn.modeling.train
+    uv run python -m telco_churn.modeling.train
 
     # 5. Evaluate and generate performance figures
-    uv run --active python -m telco_churn.modeling.predict
+    uv run python -m telco_churn.modeling.predict
 
 Outputs: cleaned/processed data in `data/processed/`, the trained
 checkpoint in `models/churn_model.ckpt`, and performance figures in
 `reports/figures/`.
-
-(Drop `--active` if using a from-scratch `uv sync` environment
-instead of the lab's `py313ml`.)
 
 --------
 
@@ -126,11 +112,11 @@ static HTML site in `docs/`.
 
 To regenerate it after changing any docstrings:
 
-    uv run --active pdoc telco_churn -o docs
+    uv run pdoc telco_churn -o docs
 
 To browse it locally with live-reload instead:
 
-    uv run --active pdoc telco_churn --http localhost:8080
+    uv run pdoc telco_churn --http localhost:8080
 
 --------
 

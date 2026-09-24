@@ -34,6 +34,7 @@
     <li><a href="#dependency-management">Dependency management</a></li>
     <li><a href="#project-organization">Project Organization</a></li>
     <li><a href="#project-progress">Project progress</a></li>
+    <li><a href="#contributing">Contributing</a></li>
   </ul></li>
 </ul>
 
@@ -314,6 +315,31 @@ report interpreting all performance visualizations.</li>
 <li><strong>Code documentation</strong>: Google-style docstrings across every
 module, with a working <code>pdoc</code> HTML export in <code>docs/</code>.</li>
 </ul>
+
+<hr />
+
+<h2 id="contributing">Contributing</h2>
+
+<ol>
+<li>Create a feature branch from <code>main</code>:
+git checkout -b feature/your-change-name</li>
+<li>Make your changes. Keep commits focused and use descriptive
+messages.</li>
+<li>Before opening a pull request, run the formatting and linting
+tools:
+    uv run black telco_churn/
+    uv run isort telco_churn/
+    uv run flake8 telco_churn/</li>
+<li>If you changed any docstrings, regenerate the HTML documentation
+so it stays in sync:
+    uv run pdoc telco_churn -o docs</li>
+<li>Push your branch and open a Pull Request against <code>main</code> on
+GitHub. Briefly describe what changed and why.</li>
+<li>Once reviewed and merged, delete the feature branch.</li>
+</ol>
+
+<p>Please do not commit directly to <code>main</code>, and never commit the raw
+dataset, API keys, or other sensitive data (see <code>.gitignore</code>).</p>
 </div>
 
                         <input id="mod-telco_churn-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">

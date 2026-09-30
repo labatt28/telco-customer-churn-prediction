@@ -134,7 +134,7 @@ This launches a local web app (usually at `http://127.0.0.1:7860`) with 3 tabs:
 - **Model Evaluation**: confusion matrix, calibration curve, and sample predictions for the currently active model
 
 On first run, the app automatically downloads the dataset (from a
-[public Hugging Face Dataset mirror](https://huggingface.co/datasets/TU_USUARIO_HF/telco-customer-churn-raw)
+[public Hugging Face Dataset mirror](https://huggingface.co/datasets/labatt28/telco-customer-churn-raw)
 of the original Kaggle dataset, CC BY 4.0) and trains a default model —
 no manual data preparation needed.
 

@@ -122,6 +122,40 @@ To browse it locally with live-reload instead:
 
 --------
 
+## Interactive Demo & Deployment
+
+An interactive Gradio demo is published as an installable PyPI package. Run it with a single command (no manual setup, no cloning required):
+
+    uvx --from telco-churn telco-churn-demo
+
+This launches a local web app (usually at `http://127.0.0.1:7860`) with 3 tabs:
+- **Data Exploration**: interactive plots over the dataset
+- **Training Interface**: train the model with your own hyperparameters, with live progress
+- **Model Evaluation**: confusion matrix, calibration curve, and sample predictions for the currently active model
+
+On first run, the app automatically downloads the dataset (from a
+[public Hugging Face Dataset mirror](https://huggingface.co/datasets/TU_USUARIO_HF/telco-customer-churn-raw)
+of the original Kaggle dataset, CC BY 4.0) and trains a default model —
+no manual data preparation needed.
+
+No API keys or environment variables are required. (Optional: set
+`HF_TOKEN` to avoid Hugging Face Hub's anonymous rate limit on the
+dataset download, if you hit it.)
+
+### Reproducing the deployment
+
+    uv build
+    uv run twine upload dist/*
+
+Requires a [PyPI](https://pypi.org) account and an API token, passed
+via environment variables (never hardcoded):
+
+    export TWINE_USERNAME=__token__
+    export TWINE_PASSWORD=<your PyPI API token>
+    uv run twine upload dist/*
+
+--------
+
 ## Dependency management
 
 Dependencies are declared in `pyproject.toml` and managed with `uv`.
@@ -195,7 +229,13 @@ with matching results.
     │   ├── predict.py          <- Code to run model inference with trained models
     │   └── train.py            <- Code to train models
     │
-    └── plots.py                <- Code to create visualizations
+    ├── plots.py                <- Code to create visualizations
+    │
+    └── demo/                   <- Interactive Gradio demo (PyPI entry point)
+        ├── app.py              <- Assembles the 3 tabs, entry point for `uvx`
+        ├── data_tab.py         <- Data Exploration tab
+        ├── train_tab.py        <- Training Interface tab
+        └── eval_tab.py         <- Model Evaluation tab
 ```
 --------
 

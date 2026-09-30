@@ -117,3 +117,44 @@ def plot_training_curves(
     plt.savefig(save_path, dpi=150)
     plt.close(fig)
     return fig
+
+def plot_numeric_distribution(df: pd.DataFrame, column: str):
+    """Histogram of a single numeric column, for the interactive demo.
+
+    Args:
+        df: Dataframe containing `column`.
+        column: Name of the numeric column to plot.
+
+    Returns:
+        The matplotlib Figure.
+    """
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.hist(df[column], bins=30, color="#4C72B0", edgecolor="white")
+    ax.set_title(f"Distribution of {column}")
+    ax.set_xlabel(column)
+    ax.set_ylabel("Frequency")
+    plt.tight_layout()
+    return fig
+
+
+def plot_categorical_vs_churn(df: pd.DataFrame, column: str):
+    """Bar chart of % churn rate per category, for the interactive demo.
+
+    Args:
+        df: Dataframe containing `column` and a "Churn" column
+            (values "Yes"/"No").
+        column: Name of the categorical column to break down by.
+
+    Returns:
+        The matplotlib Figure.
+    """
+    churn_rate = df.groupby(column)["Churn"].apply(lambda s: (s == "Yes").mean() * 100)
+    churn_rate = churn_rate.sort_values(ascending=False)
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.bar(churn_rate.index, churn_rate.values, color="#DD8452")
+    ax.set_title(f"% churn by {column}")
+    ax.set_ylabel("% of customers who churned")
+    ax.set_xlabel(column)
+    ax.tick_params(axis="x", rotation=25)
+    plt.tight_layout()
+    return fig

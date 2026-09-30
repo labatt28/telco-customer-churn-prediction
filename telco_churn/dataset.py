@@ -15,6 +15,41 @@ from telco_churn.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
 app = typer.Typer()
 
 
+def download_raw_data(
+    dest_path: Path = RAW_DATA_DIR / "WA_Fn-UseC_-Telco-Customer-Churn.csv",
+    repo_id: str = "labatt28/telco-customer-churn-raw",
+) -> Path:
+    """Download the raw CSV from its Hugging Face Dataset mirror if
+    it's not already present locally.
+
+    Used by the interactive demo (telco_churn/demo/) so a fresh user
+    doesn't need to manually download anything from Kaggle first.
+
+    Args:
+        dest_path: Where the CSV should end up.
+        repo_id: The Hugging Face Dataset repo hosting the CSV.
+
+    Returns:
+        The path to the (now guaranteed to exist) CSV file.
+
+    Example:
+        >>> download_raw_data()
+    """
+    if dest_path.exists():
+        return dest_path
+
+    import shutil
+    from huggingface_hub import hf_hub_download
+
+    downloaded = hf_hub_download(
+        repo_id=repo_id,
+        repo_type="dataset",
+        filename="WA_Fn-UseC_-Telco-Customer-Churn.csv",
+    )
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(downloaded, dest_path)
+    return dest_path
+
 def load_raw_data(input_path: Path) -> pd.DataFrame:
     """Load the raw Telco Customer Churn CSV, unmodified.
 

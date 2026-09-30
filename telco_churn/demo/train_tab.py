@@ -41,6 +41,7 @@ def _train(lr: float, max_epochs: int, batch_size: int, progress=gr.Progress()):
         enable_progress_bar=False,
         logger=False,
         callbacks=[_GradioProgressCallback(progress, int(max_epochs))],
+        enable_checkpointing=False,
     )
     trainer.fit(model, train_loader, val_loader)
 

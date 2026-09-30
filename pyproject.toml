@@ -36,6 +36,8 @@ dependencies = [
     "tqdm~=4.70",
     "typer~=0.27.2",
     "pdoc~=16.0",
+    "gradio~=6.29",
+    "huggingface_hub~=1.33",
 ]
 requires-python = "~=3.13.0"
 

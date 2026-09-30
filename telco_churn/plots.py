@@ -20,7 +20,7 @@ from telco_churn.config import FIGURES_DIR
 def plot_confusion_matrix(
     y_true: np.ndarray,
     y_pred: np.ndarray,
-    save_path: Path = FIGURES_DIR / "confusion_matrix.png",
+    save_path: Path | None = FIGURES_DIR / "confusion_matrix.png",
 ):
     """Plot and save a confusion matrix for binary churn predictions.
 
@@ -42,8 +42,9 @@ def plot_confusion_matrix(
     )
     ax.set_title("Confusion Matrix (test set)")
     plt.tight_layout()
-    save_path.parent.mkdir(parents=True, exist_ok=True)
-    plt.savefig(save_path, dpi=150)
+    if save_path is not None:
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(save_path, dpi=150)
     plt.close(fig)
     return fig
 
@@ -51,7 +52,7 @@ def plot_confusion_matrix(
 def plot_calibration_curve(
     y_true: np.ndarray,
     y_prob: np.ndarray,
-    save_path: Path = FIGURES_DIR / "calibration_curve.png",
+    save_path: Path | None = FIGURES_DIR / "confusion_matrix.png",
     n_bins: int = 10,
 ):
     """Plot and save a calibration curve (reliability diagram).
@@ -72,8 +73,9 @@ def plot_calibration_curve(
     CalibrationDisplay.from_predictions(y_true, y_prob, n_bins=n_bins, ax=ax)
     ax.set_title("Calibration Curve (test set)")
     plt.tight_layout()
-    save_path.parent.mkdir(parents=True, exist_ok=True)
-    plt.savefig(save_path, dpi=150)
+    if save_path is not None:
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(save_path, dpi=150)
     plt.close(fig)
     return fig
 

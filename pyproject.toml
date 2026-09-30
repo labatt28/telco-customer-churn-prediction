@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "telco_churn"
-version = "0.0.1"
+version = "0.0.2"
 description = "ML project that predicts wether a customer will churn based on account and service usage data"
 authors = [
   { name = "Team 9" },

@@ -1,4 +1,4 @@
-"""Gradio demo entry point (used by Hugging Face Spaces)."""
+"""Gradio demo entry point (the PyPI console-script target, run via uvx)."""
 
 import pandas as pd
 import lightning as L

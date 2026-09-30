@@ -1,6 +1,6 @@
 """telco_churn: a small, structured ML pipeline for customer churn prediction.
 
-Practice 1-3 - Software Development Oriented to Machine Learning (UPNA).
+Practice 1-4 - Software Development Oriented to Machine Learning (UPNA).
 
 .. include:: ../README.md
 """

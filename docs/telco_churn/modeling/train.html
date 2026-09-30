@@ -85,8 +85,11 @@
                         <div class="docstring"><p>Model training: a small MLP trained with PyTorch Lightning to
 predict customer churn from the processed, model-ready features.</p>
 
-<p>Run as a script to train and checkpoint the model:
-    uv run --active python -m <a href="">telco_churn.modeling.train</a></p>
+<h6 id="run-as-a-script-to-train-and-checkpoint-the-model">Run as a script to train and checkpoint the model:</h6>
+
+<blockquote>
+  <p>uv run --active python -m <a href="">telco_churn.modeling.train</a></p>
+</blockquote>
 </div>
 
                         <input id="mod-train-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
@@ -312,9 +315,12 @@ predict customer churn from the processed, model-ready features.</p>
 
             <div class="docstring"><p>Small MLP for binary churn classification.</p>
 
-<p>Attributes:
-    net: 3-layer feedforward network (input_dim -> 32 -> 16 -> 1).
-    loss_fn: Binary cross-entropy with logits.</p>
+<h6 id="attributes">Attributes:</h6>
+
+<ul>
+<li><strong>net:</strong>  3-layer feedforward network (input_dim -> 32 -> 16 -> 1).</li>
+<li><strong>loss_fn:</strong>  Binary cross-entropy with logits.</li>
+</ul>
 </div>
 
 
@@ -350,9 +356,12 @@ predict customer churn from the processed, model-ready features.</p>
 
             <div class="docstring"><p>Initialize the model.</p>
 
-<p>Args:
-    input_dim: Number of input features (columns, excluding target).
-    lr: Learning rate for the Adam optimizer.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>input_dim:</strong>  Number of input features (columns, excluding target).</li>
+<li><strong>lr:</strong>  Learning rate for the Adam optimizer.</li>
+</ul>
 </div>
 
 
@@ -501,22 +510,27 @@ predict customer churn from the processed, model-ready features.</p>
 
             <div class="docstring"><p>Wrap a processed dataframe into a PyTorch DataLoader.</p>
 
-<p>Args:
-    df: Processed dataframe (features + target column).
-    batch_size: Batch size for the DataLoader.
-    shuffle: Whether to shuffle (True for training, False otherwise).</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    A DataLoader yielding (X, y) float32 tensor batches.</p>
+<ul>
+<li><strong>df:</strong>  Processed dataframe (features + target column).</li>
+<li><strong>batch_size:</strong>  Batch size for the DataLoader.</li>
+<li><strong>shuffle:</strong>  Whether to shuffle (True for training, False otherwise).</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>train_loader = make_dataloader(train_df, batch_size=64, shuffle=True)</p>
-    </blockquote>
-  </blockquote>
+  <p>A DataLoader yielding (X, y) float32 tensor batches.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">train_loader</span> <span class="o">=</span> <span class="n">make_dataloader</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -528,7 +542,7 @@ predict customer churn from the processed, model-ready features.</p>
                     <div class="decorator decorator-app.command">@app.command()</div>
 
         <span class="def">def</span>
-        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">train_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/data/processed/train.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">val_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/data/processed/val.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">max_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span>,</span><span class="param">	<span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span></span><span class="return-annotation">):</span></span>
+        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">train_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/data/processed/train.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">val_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/data/processed/val.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">max_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span>,</span><span class="param">	<span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="main-view-source"><span>View Source</span></label>
 

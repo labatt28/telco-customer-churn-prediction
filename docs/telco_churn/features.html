@@ -73,8 +73,11 @@
                         <div class="docstring"><p>Feature engineering: turns the cleaned dataset into a model-ready,
 fully numeric table, split into stratified train/val/test sets.</p>
 
-<p>Run as a script to regenerate the splits:
-    uv run --active python -m <a href="">telco_churn.features</a></p>
+<h6 id="run-as-a-script-to-regenerate-the-splits">Run as a script to regenerate the splits:</h6>
+
+<blockquote>
+  <p>uv run --active python -m <a href="">telco_churn.features</a></p>
+</blockquote>
 </div>
 
                         <input id="mod-features-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
@@ -325,20 +328,25 @@ variable trap). Numeric columns are left untouched here; scaling
 happens only after the train/val/test split, to avoid leaking
 val/test statistics into how train is scaled.</p>
 
-<p>Args:
-    df: Cleaned dataframe, as returned by <code><a href="dataset.html#clean_data">telco_churn.dataset.clean_data</a></code>.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    A fully numeric dataframe, ready to be split.</p>
+<ul>
+<li><strong>df:</strong>  Cleaned dataframe, as returned by <code><a href="dataset.html#clean_data">telco_churn.dataset.clean_data</a></code>.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>encode_features(clean_df)</p>
-    </blockquote>
-  </blockquote>
+  <p>A fully numeric dataframe, ready to be split.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">encode_features</span><span class="p">(</span><span class="n">clean_df</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -389,22 +397,27 @@ val/test statistics into how train is scaled.</p>
 <p>Stratified on the target so every split keeps the same churn
 ratio as the full dataset.</p>
 
-<p>Args:
-    df: Fully numeric dataframe, as returned by <code><a href="#encode_features">encode_features</a></code>.
-    val_size: Fraction of the full dataset used for validation.
-    test_size: Fraction of the full dataset used for testing.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    A <code>(train, val, test)</code> tuple of dataframes.</p>
+<ul>
+<li><strong>df:</strong>  Fully numeric dataframe, as returned by <code><a href="#encode_features">encode_features</a></code>.</li>
+<li><strong>val_size:</strong>  Fraction of the full dataset used for validation.</li>
+<li><strong>test_size:</strong>  Fraction of the full dataset used for testing.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>train, val, test = split_data(encoded_df)</p>
-    </blockquote>
-  </blockquote>
+  <p>A <code>(train, val, test)</code> tuple of dataframes.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">encoded_df</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -454,23 +467,28 @@ ratio as the full dataset.</p>
 <p>Fitting on train only (never on val/test) prevents leaking
 information about val/test into training.</p>
 
-<p>Args:
-    train: Training split.
-    val: Validation split.
-    test: Test split.
-    columns: Numeric column names to scale.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    A <code>(train, val, test)</code> tuple with <code>columns</code> standardized.</p>
+<ul>
+<li><strong>train:</strong>  Training split.</li>
+<li><strong>val:</strong>  Validation split.</li>
+<li><strong>test:</strong>  Test split.</li>
+<li><strong>columns:</strong>  Numeric column names to scale.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>train, val, test = scale_numeric(train, val, test)</p>
-    </blockquote>
-  </blockquote>
+  <p>A <code>(train, val, test)</code> tuple with <code>columns</code> standardized.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">scale_numeric</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -482,7 +500,7 @@ information about val/test into training.</p>
                     <div class="decorator decorator-app.command">@app.command()</div>
 
         <span class="def">def</span>
-        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">input_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/data/processed/telco_churn_clean.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">output_dir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/data/processed'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
+        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">input_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/data/processed/telco_churn_clean.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">output_dir</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/data/processed'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="main-view-source"><span>View Source</span></label>
 

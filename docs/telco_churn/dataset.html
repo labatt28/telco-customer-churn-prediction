@@ -60,8 +60,11 @@
 
                         <div class="docstring"><p>Data loading and cleaning for the Telco Customer Churn dataset.</p>
 
-<p>Run as a script to regenerate the cleaned CSV:
-    uv run --active python -m <a href="">telco_churn.dataset</a></p>
+<h6 id="run-as-a-script-to-regenerate-the-cleaned-csv">Run as a script to regenerate the cleaned CSV:</h6>
+
+<blockquote>
+  <p>uv run --active python -m <a href="">telco_churn.dataset</a></p>
+</blockquote>
 </div>
 
                         <input id="mod-dataset-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
@@ -188,20 +191,25 @@
 
             <div class="docstring"><p>Load the raw Telco Customer Churn CSV, unmodified.</p>
 
-<p>Args:
-    input_path: Path to the raw CSV file.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    The raw dataframe, exactly as read from disk (no cleaning).</p>
+<ul>
+<li><strong>input_path:</strong>  Path to the raw CSV file.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>load_raw_data(RAW_DATA_DIR / "WA_Fn-UseC_-Telco-Customer-Churn.csv")</p>
-    </blockquote>
-  </blockquote>
+  <p>The raw dataframe, exactly as read from disk (no cleaning).</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">load_raw_data</span><span class="p">(</span><span class="n">RAW_DATA_DIR</span> <span class="o">/</span> <span class="s2">"WA_Fn-UseC_-Telco-Customer-Churn.csv"</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -249,20 +257,25 @@
 haven't been billed yet. We convert the column to numeric and fill
 those 11 rows with 0.</p>
 
-<p>Args:
-    df: Raw dataframe as returned by <code><a href="#load_raw_data">load_raw_data</a></code>.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    Cleaned dataframe, with <code>TotalCharges</code> as a proper numeric column.</p>
+<ul>
+<li><strong>df:</strong>  Raw dataframe as returned by <code><a href="#load_raw_data">load_raw_data</a></code>.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>clean_data(raw_df)</p>
-    </blockquote>
-  </blockquote>
+  <p>Cleaned dataframe, with <code>TotalCharges</code> as a proper numeric column.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_data</span><span class="p">(</span><span class="n">raw_df</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -274,7 +287,7 @@ those 11 rows with 0.</p>
                     <div class="decorator decorator-app.command">@app.command()</div>
 
         <span class="def">def</span>
-        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">input_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">output_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/data/processed/telco_churn_clean.csv'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
+        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">input_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">output_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/data/processed/telco_churn_clean.csv'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="main-view-source"><span>View Source</span></label>
 

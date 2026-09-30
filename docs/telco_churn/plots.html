@@ -193,7 +193,7 @@ code. Same DRY principle used throughout the rest of the project.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">plot_confusion_matrix</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">y_true</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">y_pred</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/reports/figures/confusion_matrix.png'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
+        <span class="name">plot_confusion_matrix</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">y_true</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">y_pred</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/reports/figures/confusion_matrix.png'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="plot_confusion_matrix-view-source"><span>View Source</span></label>
 
@@ -233,22 +233,27 @@ code. Same DRY principle used throughout the rest of the project.</p>
 
             <div class="docstring"><p>Plot and save a confusion matrix for binary churn predictions.</p>
 
-<p>Args:
-    y_true: Ground-truth labels (0/1), shape (n_samples,).
-    y_pred: Predicted labels (0/1), shape (n_samples,).
-    save_path: Where to save the figure as a PNG.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    The matplotlib Figure.</p>
+<ul>
+<li><strong>y_true:</strong>  Ground-truth labels (0/1), shape (n_samples,).</li>
+<li><strong>y_pred:</strong>  Predicted labels (0/1), shape (n_samples,).</li>
+<li><strong>save_path:</strong>  Where to save the figure as a PNG.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>plot_confusion_matrix(y_true, preds)</p>
-    </blockquote>
-  </blockquote>
+  <p>The matplotlib Figure.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -259,7 +264,7 @@ code. Same DRY principle used throughout the rest of the project.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">plot_calibration_curve</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">y_true</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">y_prob</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/reports/figures/calibration_curve.png'</span><span class="p">)</span>,</span><span class="param">	<span class="n">n_bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span></span><span class="return-annotation">):</span></span>
+        <span class="name">plot_calibration_curve</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">y_true</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">y_prob</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/reports/figures/calibration_curve.png'</span><span class="p">)</span>,</span><span class="param">	<span class="n">n_bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="plot_calibration_curve-view-source"><span>View Source</span></label>
 
@@ -298,23 +303,28 @@ code. Same DRY principle used throughout the rest of the project.</p>
 
             <div class="docstring"><p>Plot and save a calibration curve (reliability diagram).</p>
 
-<p>Args:
-    y_true: Ground-truth labels (0/1), shape (n_samples,).
-    y_prob: Predicted probabilities for the positive class.
-    save_path: Where to save the figure as a PNG.
-    n_bins: Number of probability bins to group predictions into.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    The matplotlib Figure.</p>
+<ul>
+<li><strong>y_true:</strong>  Ground-truth labels (0/1), shape (n_samples,).</li>
+<li><strong>y_prob:</strong>  Predicted probabilities for the positive class.</li>
+<li><strong>save_path:</strong>  Where to save the figure as a PNG.</li>
+<li><strong>n_bins:</strong>  Number of probability bins to group predictions into.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>plot_calibration_curve(y_true, probs)</p>
-    </blockquote>
-  </blockquote>
+  <p>The matplotlib Figure.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_calibration_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -325,7 +335,7 @@ code. Same DRY principle used throughout the rest of the project.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">plot_training_curves</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">metrics_csv</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/reports/figures/training_curves.png'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
+        <span class="name">plot_training_curves</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">metrics_csv</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/reports/figures/training_curves.png'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="plot_training_curves-view-source"><span>View Source</span></label>
 
@@ -373,22 +383,27 @@ code. Same DRY principle used throughout the rest of the project.</p>
 
             <div class="docstring"><p>Plot loss and accuracy per epoch from a Lightning CSVLogger output.</p>
 
-<p>Args:
-    metrics_csv: Path to the <code>metrics.csv</code> file written by
-        <code>lightning.pytorch.loggers.CSVLogger</code> during training.
-    save_path: Where to save the figure as a PNG.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    The matplotlib Figure, or <code>None</code> if <code>metrics_csv</code> doesn't exist.</p>
+<ul>
+<li><strong>metrics_csv:</strong>  Path to the <code>metrics.csv</code> file written by
+<code>lightning.pytorch.loggers.CSVLogger</code> during training.</li>
+<li><strong>save_path:</strong>  Where to save the figure as a PNG.</li>
+</ul>
 
-<p>Example:</p>
+<h6 id="returns">Returns:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>plot_training_curves(MODELS_DIR / "training_logs/version_0/metrics.csv")</p>
-    </blockquote>
-  </blockquote>
+  <p>The matplotlib Figure, or <code>None</code> if <code>metrics_csv</code> doesn't exist.</p>
+</blockquote>
+
+<h6 id="example">Example:</h6>
+
+<blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_training_curves</span><span class="p">(</span><span class="n">MODELS_DIR</span> <span class="o">/</span> <span class="s2">"training_logs/version_0/metrics.csv"</span><span class="p">)</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 

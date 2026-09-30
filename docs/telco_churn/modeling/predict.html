@@ -190,7 +190,7 @@ and the highest-loss samples).</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">save_highest_loss_samples</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">test_df</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span>,</span><span class="param">	<span class="n">y_true</span>,</span><span class="param">	<span class="n">probs</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/reports/figures/highest_loss_samples.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">top_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span></span><span class="return-annotation">) -> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span>:</span></span>
+        <span class="name">save_highest_loss_samples</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">test_df</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span>,</span><span class="param">	<span class="n">y_true</span>,</span><span class="param">	<span class="n">probs</span>,</span><span class="param">	<span class="n">save_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/reports/figures/highest_loss_samples.csv'</span><span class="p">)</span>,</span><span class="param">	<span class="n">top_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span></span><span class="return-annotation">) -> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span>:</span></span>
 
                 <label class="view-source-button" for="save_highest_loss_samples-view-source"><span>View Source</span></label>
 
@@ -237,15 +237,21 @@ and the highest-loss samples).</p>
 <p>Useful for spotting patterns in the model's biggest mistakes (see
 <code>reports/report.md</code> for the analysis of these specific customers).</p>
 
-<p>Args:
-    test_df: The test-set dataframe (features + target).
-    y_true: Ground-truth labels (0/1), shape (n_samples,).
-    probs: Predicted probabilities for the positive class.
-    save_path: Where to save the resulting CSV.
-    top_n: How many highest-loss samples to keep.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    A dataframe with the top_n rows, sorted by loss (descending).</p>
+<ul>
+<li><strong>test_df:</strong>  The test-set dataframe (features + target).</li>
+<li><strong>y_true:</strong>  Ground-truth labels (0/1), shape (n_samples,).</li>
+<li><strong>probs:</strong>  Predicted probabilities for the positive class.</li>
+<li><strong>save_path:</strong>  Where to save the resulting CSV.</li>
+<li><strong>top_n:</strong>  How many highest-loss samples to keep.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>A dataframe with the top_n rows, sorted by loss (descending).</p>
+</blockquote>
 </div>
 
 
@@ -256,7 +262,7 @@ and the highest-loss samples).</p>
                     <div class="decorator decorator-app.command">@app.command()</div>
 
         <span class="def">def</span>
-        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">checkpoint_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/models/churn_model.ckpt'</span><span class="p">)</span>,</span><span class="param">	<span class="n">test_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/p3_software/telco_customer_churn_prediction/data/processed/test.csv'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
+        <span class="name">main</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">checkpoint_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/models/churn_model.ckpt'</span><span class="p">)</span>,</span><span class="param">	<span class="n">test_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">'/home/alumno/Desktop/telco-customer-churn-prediction/data/processed/test.csv'</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="main-view-source"><span>View Source</span></label>
 
@@ -317,9 +323,12 @@ inference on <code>test.csv</code>, and writes the confusion matrix,
 calibration curve, training curves, and highest-loss samples to
 <code>reports/figures/</code>.</p>
 
-<p>Args:
-    checkpoint_path: Path to the trained Lightning checkpoint.
-    test_path: Path to the processed test-set CSV.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>checkpoint_path:</strong>  Path to the trained Lightning checkpoint.</li>
+<li><strong>test_path:</strong>  Path to the processed test-set CSV.</li>
+</ul>
 </div>
 
 

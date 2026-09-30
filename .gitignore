@@ -3,6 +3,7 @@
 
 #Trained model checkpoints (regenerate by running telco_churn.modeling.train)
 /models/
+/checkpoints/
 
 # Mac OS-specific storage files
 .DS_Store

@@ -57,11 +57,18 @@ def build_eval_tab(checkpoint_state: gr.State) -> None:
         "train a new one in the **Training Interface** tab, this "
         "updates automatically."
     )
+
+    # Compute the initial evaluation up front, so the tab shows real
+    # results immediately on load instead of waiting for a click or
+    # a state change (gr.State.change only fires on later changes,
+    # never for the value it was created with).
+    initial_cm, initial_cal, initial_metrics, initial_samples = _evaluate(checkpoint_state.value)
+
     with gr.Row():
-        cm_plot = gr.Plot(label="Confusion Matrix")
-        cal_plot = gr.Plot(label="Calibration Curve")
-    metrics_md = gr.Markdown()
-    samples_table = gr.Dataframe(label="Sample predictions (first 10 test customers)")
+        cm_plot = gr.Plot(value=initial_cm, label="Confusion Matrix")
+        cal_plot = gr.Plot(value=initial_cal, label="Calibration Curve")
+    metrics_md = gr.Markdown(value=initial_metrics)
+    samples_table = gr.Dataframe(value=initial_samples, label="Sample predictions (first 10 test customers)")
     refresh_btn = gr.Button("Re-evaluate current model")
 
     outputs = [cm_plot, cal_plot, metrics_md, samples_table]

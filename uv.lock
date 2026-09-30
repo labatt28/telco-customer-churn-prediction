@@ -2545,8 +2545,8 @@ dependencies = [
 requires-dist = [
     { name = "black", specifier = "~=26.5" },
     { name = "flake8", specifier = "~=7.3" },
-    { name = "gradio" },
-    { name = "huggingface-hub" },
+    { name = "gradio", specifier = "~=6.29" },
+    { name = "huggingface-hub", specifier = "~=1.33" },
     { name = "ipython", specifier = "~=9.17" },
     { name = "isort", specifier = "~=9.0" },
     { name = "jupyterlab", specifier = "~=4.6" },

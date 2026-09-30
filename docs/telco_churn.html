@@ -76,6 +76,8 @@ telco_churn    </h1>
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
+<p><a href="https://labatt28.github.io/telco-customer-churn-prediction/">View the full documentation</a></p>
+
 <p>ML project that predicts whether a customer will churn based on account and service usage data</p>
 
 <hr />
@@ -233,52 +235,53 @@ with matching results.</p>
 
 <h2 id="project-organization">Project Organization</h2>
 
-<p>├── LICENSE &lt;- Open-source license if one is chosen
-├── Makefile &lt;- Makefile with convenience commands like make data or make train
-├── README.md &lt;- The top-level README for developers using this project.
+<pre><code>├── LICENSE            &lt;- Open-source license if one is chosen
+├── Makefile           &lt;- Makefile with convenience commands like `make data` or `make train`
+├── README.md          &lt;- The top-level README for developers using this project.
 ├── data
-│ ├── external &lt;- Data from third party sources.
-│ ├── interim &lt;- Intermediate data that has been transformed.
-│ ├── processed &lt;- The final, canonical data sets for modeling.
-│ └── raw &lt;- The original, immutable data dump.
+│   ├── external       &lt;- Data from third party sources.
+│   ├── interim        &lt;- Intermediate data that has been transformed.
+│   ├── processed      &lt;- The final, canonical data sets for modeling.
+│   └── raw            &lt;- The original, immutable data dump.
 │
-├── docs &lt;- pdoc-generated HTML API documentation
+├── docs               &lt;- pdoc-generated HTML API documentation
 │
-├── models &lt;- Trained and serialized models, model predictions, or model summaries
+├── models             &lt;- Trained and serialized models, model predictions, or model summaries
 │
-├── notebooks &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
-│ the creator's initials, and a short - delimited description, e.g.
-│ 1.0-jqp-initial-data-exploration.
+├── notebooks          &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
+│                         the creator's initials, and a short `-` delimited description, e.g.
+│                         `1.0-jqp-initial-data-exploration`.
 │
-├── pyproject.toml &lt;- Project configuration file with package metadata for
-│ telco_churn and configuration for tools like black
+├── pyproject.toml     &lt;- Project configuration file with package metadata for
+│                         telco_churn and configuration for tools like black
 │
-├── references &lt;- Data dictionaries, manuals, and all other explanatory materials.
+├── references         &lt;- Data dictionaries, manuals, and all other explanatory materials.
 │
-├── reports &lt;- Generated analysis as HTML, PDF, LaTeX, etc.
-│ └── figures &lt;- Generated graphics and figures to be used in reporting
+├── reports            &lt;- Generated analysis as HTML, PDF, LaTeX, etc.
+│   └── figures        &lt;- Generated graphics and figures to be used in reporting
 │
-├── requirements.txt &lt;- The requirements file for reproducing the analysis environment, e.g.
-│ generated with pip freeze &gt; requirements.txt
+├── requirements.txt   &lt;- The requirements file for reproducing the analysis environment, e.g.
+│                         generated with `pip freeze &gt; requirements.txt`
 │
-├── setup.cfg &lt;- Configuration file for flake8
+├── setup.cfg          &lt;- Configuration file for flake8
 │
-└── telco_churn &lt;- Source code for use in this project.
-│
-├── init.py &lt;- Makes telco_churn a Python module
-│
-├── config.py &lt;- Store useful variables and configuration
-│
-├── dataset.py &lt;- Scripts to download or generate data
-│
-├── features.py &lt;- Code to create features for modeling
-│
-├── modeling
-│ ├── init.py
-│ ├── predict.py &lt;- Code to run model inference with trained models
-│ └── train.py &lt;- Code to train models
-│
-└── plots.py &lt;- Code to create visualizations</p>
+└── telco_churn   &lt;- Source code for use in this project.
+    │
+    ├── __init__.py             &lt;- Makes telco_churn a Python module
+    │
+    ├── config.py               &lt;- Store useful variables and configuration
+    │
+    ├── dataset.py              &lt;- Scripts to download or generate data
+    │
+    ├── features.py             &lt;- Code to create features for modeling
+    │
+    ├── modeling
+    │   ├── __init__.py
+    │   ├── predict.py          &lt;- Code to run model inference with trained models
+    │   └── train.py            &lt;- Code to train models
+    │
+    └── plots.py                &lt;- Code to create visualizations
+</code></pre>
 
 <hr />
 
